@@ -15,22 +15,46 @@
 
 <body>
 
-    <!-- Atmospheric background -->
     <div class="strata-bg">
         <div class="strata-glow"></div>
     </div>
 
-    <!-- Navigation -->
     <nav>
-        <a class="nav-logo" href="#" style="display: flex; align-items: center; gap: 0.6rem; text-decoration: none;">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L21 7.2V16.8L12 22L3 16.8V7.2L12 2Z" stroke="#c8831e" stroke-opacity="0.3"
-                    stroke-width="1.5" />
-                <path d="M3 12L8.5 8L14.5 17L21 11" stroke="#c8831e" stroke-width="1.5" stroke-linejoin="round" />
-                <circle cx="8.5" cy="8" r="2" fill="#1ab3bc" />
-                <circle cx="14.5" cy="17" r="2.5" fill="#1ab3bc" />
+        <a class="nav-logo" href="#" style="display: flex; align-items: center; gap: 0.8rem; text-decoration: none;">
+            <svg width="36" height="36" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <clipPath id="lqclip">
+                        <polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28"/>
+                    </clipPath>
+                </defs>
+                <polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#08090b"/>
+                <g clip-path="url(#lqclip)">
+                    <rect x="0" y="18" width="100" height="11" fill="#c8831e" fill-opacity="0.07"/>
+                    <rect x="0" y="32" width="100" height="9" fill="#1ab3bc" fill-opacity="0.055"/>
+                    <rect x="0" y="44" width="100" height="12" fill="#c8831e" fill-opacity="0.1"/>
+                    <rect x="0" y="60" width="100" height="8" fill="#1ab3bc" fill-opacity="0.06"/>
+                    <rect x="0" y="72" width="100" height="10" fill="#c8831e" fill-opacity="0.07"/>
+                    <line x1="0" y1="29" x2="100" y2="30" stroke="#c8831e" stroke-opacity="0.3" stroke-width="0.5"/>
+                    <line x1="0" y1="41" x2="100" y2="40" stroke="#1ab3bc" stroke-opacity="0.22" stroke-width="0.5"/>
+                    <line x1="0" y1="56" x2="100" y2="57" stroke="#c8831e" stroke-opacity="0.35" stroke-width="0.5"/>
+                    <line x1="0" y1="68" x2="100" y2="68" stroke="#1ab3bc" stroke-opacity="0.22" stroke-width="0.5"/>
+                    <line x1="0" y1="82" x2="100" y2="81" stroke="#c8831e" stroke-opacity="0.25" stroke-width="0.5"/>
+                    <line x1="50" y1="6" x2="50" y2="94" stroke="#c8831e" stroke-opacity="0.32" stroke-width="0.7"/>
+                    <line x1="11.9" y1="50" x2="88.1" y2="50" stroke="#c8831e" stroke-opacity="0.14" stroke-width="0.5"/>
+                    <polygon points="50,36 64,50 50,64 36,50" fill="none" stroke="#c8831e" stroke-opacity="0.18" stroke-width="0.5"/>
+                    <polygon points="50,41 59,50 50,59 41,50" fill="#c8831e" fill-opacity="0.92"/>
+                    <polygon points="50,44 56,50 50,56 44,50" fill="#e8a84a" fill-opacity="0.35"/>
+                    <circle cx="30" cy="30" r="1.6" fill="#1ab3bc" fill-opacity="0.55"/>
+                    <circle cx="70" cy="41" r="1.3" fill="#c8831e" fill-opacity="0.5"/>
+                    <circle cx="37" cy="57" r="1.5" fill="#1ab3bc" fill-opacity="0.5"/>
+                    <circle cx="65" cy="68" r="1.2" fill="#c8831e" fill-opacity="0.42"/>
+                    <circle cx="72" cy="30" r="1.0" fill="#c8831e" fill-opacity="0.32"/>
+                    <circle cx="26" cy="67" r="1.0" fill="#1ab3bc" fill-opacity="0.35"/>
+                </g>
+                <polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="none" stroke="#c8831e" stroke-width="1.5" stroke-linejoin="round"/>
+                <polygon points="50,3 90.7,26.5 90.7,73.5 50,97 9.3,73.5 9.3,26.5" fill="none" stroke="#c8831e" stroke-opacity="0.2" stroke-width="0.5" stroke-linejoin="round"/>
             </svg>
-            <div>Litho<span style="color: var(--teal);">Quest</span></div>
+            <div style="font-size: 1.25rem; font-weight: 500;">Litho<span style="color: var(--teal);">Quest</span></div>
         </a>
         <ul class="nav-links">
             <li><a href="#features">Platform</a></li>
@@ -40,7 +64,6 @@
         <a href="#cta" class="nav-cta">Early Access</a>
     </nav>
 
-    <!-- Hero -->
     <section id="hero">
         <div class="container"
             style="display:flex; align-items:center; justify-content:space-between; gap:2rem; width:100%;">
@@ -62,7 +85,6 @@
                 </div>
             </div>
 
-            <!-- Geological core diagram -->
             <svg class="hero-depth geo-core" viewBox="0 0 460 460" fill="none" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true">
                 <defs>
@@ -75,324 +97,4 @@
                     </clipPath>
                 </defs>
 
-                <!-- Outer ring -->
-                <circle cx="230" cy="230" r="200" stroke="#c8831e" stroke-opacity="0.1" stroke-width="0.5" />
-                <circle cx="230" cy="230" r="185" stroke="#c8831e" stroke-opacity="0.08" stroke-width="0.5" />
-
-                <!-- Strata layers clipped to circle -->
-                <g clip-path="url(#circleClip)">
-                    <!-- Layer fills -->
-                    <rect x="55" y="55" width="350" height="44" fill="#c8831e" fill-opacity="0.04" />
-                    <rect x="55" y="99" width="350" height="36" fill="#1ab3bc" fill-opacity="0.035" />
-                    <rect x="55" y="135" width="350" height="52" fill="#c8831e" fill-opacity="0.055" />
-                    <rect x="55" y="187" width="350" height="30" fill="#8a7c68" fill-opacity="0.04" />
-                    <rect x="55" y="217" width="350" height="46" fill="#1ab3bc" fill-opacity="0.04" />
-                    <rect x="55" y="263" width="350" height="38" fill="#c8831e" fill-opacity="0.045" />
-                    <rect x="55" y="301" width="350" height="50" fill="#1ab3bc" fill-opacity="0.03" />
-                    <rect x="55" y="351" width="350" height="60" fill="#c8831e" fill-opacity="0.05" />
-
-                    <!-- Strata dividing lines -->
-                    <line x1="55" y1="99" x2="405" y2="103" stroke="#c8831e" stroke-opacity="0.18" stroke-width="0.5" />
-                    <line x1="55" y1="135" x2="405" y2="131" stroke="#1ab3bc" stroke-opacity="0.15"
-                        stroke-width="0.5" />
-                    <line x1="55" y1="187" x2="405" y2="189" stroke="#c8831e" stroke-opacity="0.2" stroke-width="0.5" />
-                    <line x1="55" y1="217" x2="405" y2="215" stroke="#8a7c68" stroke-opacity="0.12"
-                        stroke-width="0.5" />
-                    <line x1="55" y1="263" x2="405" y2="265" stroke="#1ab3bc" stroke-opacity="0.18"
-                        stroke-width="0.5" />
-                    <line x1="55" y1="301" x2="405" y2="299" stroke="#c8831e" stroke-opacity="0.14"
-                        stroke-width="0.5" />
-                    <line x1="55" y1="351" x2="405" y2="354" stroke="#1ab3bc" stroke-opacity="0.12"
-                        stroke-width="0.5" />
-
-                    <!-- Mineral vein -->
-                    <path d="M230 55 Q218 130 224 187 Q230 220 228 263 Q226 310 230 405" stroke="#c8831e"
-                        stroke-opacity="0.35" stroke-width="1.5" fill="none" />
-                    <path d="M230 55 Q242 110 237 180 Q232 230 234 280 Q236 330 230 405" stroke="#c8831e"
-                        stroke-opacity="0.12" stroke-width="0.5" fill="none" />
-
-                    <!-- Secondary vein -->
-                    <path d="M170 55 Q175 120 185 190 Q195 240 200 310 Q205 355 198 405" stroke="#1ab3bc"
-                        stroke-opacity="0.2" stroke-width="0.8" fill="none" />
-
-                    <!-- Mineral nodes -->
-                    <circle cx="224" cy="135" r="4" fill="#c8831e" fill-opacity="0.7" />
-                    <circle cx="224" cy="135" r="8" fill="#c8831e" fill-opacity="0.12" />
-                    <circle cx="228" cy="217" r="3" fill="#1ab3bc" fill-opacity="0.7" />
-                    <circle cx="228" cy="217" r="7" fill="#1ab3bc" fill-opacity="0.1" />
-                    <circle cx="229" cy="301" r="5" fill="#c8831e" fill-opacity="0.6" />
-                    <circle cx="229" cy="301" r="10" fill="#c8831e" fill-opacity="0.1" />
-                    <circle cx="186" cy="187" r="2.5" fill="#1ab3bc" fill-opacity="0.5" />
-
-                    <!-- Data point labels -->
-                    <text x="244" y="139" font-family="JetBrains Mono, monospace" font-size="8" fill="#c8831e"
-                        fill-opacity="0.6">Li 847ppm</text>
-                    <text x="244" y="221" font-family="JetBrains Mono, monospace" font-size="8" fill="#1ab3bc"
-                        fill-opacity="0.6">TOC 3.2%</text>
-                    <text x="244" y="305" font-family="JetBrains Mono, monospace" font-size="8" fill="#c8831e"
-                        fill-opacity="0.6">Tmax 432°C</text>
-                </g>
-
-                <!-- Main circle border -->
-                <circle cx="230" cy="230" r="175" stroke="#c8831e" stroke-opacity="0.22" stroke-width="0.5" />
-
-                <!-- Compass ring -->
-                <circle cx="230" cy="230" r="210" stroke="#c8831e" stroke-opacity="0.06" stroke-width="0.5"
-                    stroke-dasharray="4 8" />
-
-                <!-- Glow -->
-                <circle cx="230" cy="230" r="175" fill="url(#coreGlow)" />
-
-                <!-- Depth scale ticks -->
-                <line x1="418" y1="99" x2="428" y2="99" stroke="#c8831e" stroke-opacity="0.25" stroke-width="0.5" />
-                <line x1="418" y1="135" x2="424" y2="135" stroke="#c8831e" stroke-opacity="0.18" stroke-width="0.5" />
-                <line x1="418" y1="187" x2="428" y2="187" stroke="#c8831e" stroke-opacity="0.25" stroke-width="0.5" />
-                <line x1="418" y1="217" x2="424" y2="217" stroke="#c8831e" stroke-opacity="0.18" stroke-width="0.5" />
-                <line x1="418" y1="263" x2="428" y2="263" stroke="#c8831e" stroke-opacity="0.25" stroke-width="0.5" />
-                <text x="432" y="102" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#6e6558">0.2km</text>
-                <text x="432" y="190" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#6e6558">1.1km</text>
-                <text x="432" y="266" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#6e6558">2.4km</text>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Stats bar -->
-    <div class="stats-bar" style="position:relative;z-index:1;">
-        <div class="container">
-            <div class="stat-item reveal">
-                <div class="stat-num">10×</div>
-                <div class="stat-label">Faster Geochemical Processing</div>
-            </div>
-            <div class="stat-item reveal reveal-delay-1">
-                <div class="stat-num">3</div>
-                <div class="stat-label">Core AI-Powered Modules</div>
-            </div>
-            <div class="stat-item reveal reveal-delay-2">
-                <div class="stat-num">AAS+</div>
-                <div class="stat-label">Lab Parameter Coverage</div>
-            </div>
-            <div class="stat-item reveal reveal-delay-3">
-                <div class="stat-num">∞</div>
-                <div class="stat-label">Stratigraphic Records Queryable</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Problem -->
-    <section id="problem" class="section">
-        <div class="container">
-            <div class="problem-grid">
-                <div class="problem-text reveal">
-                    <div class="section-eyebrow">The Industry Problem</div>
-                    <h2>Exploration is stuck in <em>manual mode</em></h2>
-                    <p>The mineral exploration sector — particularly critical battery metal discovery like lithium from
-                        lepidolite — depends on tedious, error-prone manual processing that hasn't meaningfully changed
-                        in decades.</p>
-                    <p>Geoscientists lose weeks to routine calculations. Stratigraphic knowledge sits in disconnected
-                        silos. And geology students graduate without ever touching the AI tools the modern industry
-                        demands.</p>
-                    <p>The gap between fieldwork and actionable intelligence has never been wider. LithoQuest closes it.
-                    </p>
-                </div>
-                <div class="problem-cards">
-                    <div class="problem-card reveal reveal-delay-1">
-                        <div class="problem-card-title">Data Bottlenecks</div>
-                        <p>Excessive time spent on routine AAS parameter interpretation and ppm concentration
-                            conversions — tasks that should take seconds, not days.</p>
-                    </div>
-                    <div class="problem-card reveal reveal-delay-2">
-                        <div class="problem-card-title">Fragmented Insights</div>
-                        <p>Traditional geological mapping is disconnected from computational tools, inflating
-                            "time-to-discovery" and increasing operational costs across every survey.</p>
-                    </div>
-                    <div class="problem-card reveal reveal-delay-3">
-                        <div class="problem-card-title">The Educational Gap</div>
-                        <p>Academic geology departments lack integrated software that teaches AI and computer vision
-                            applied to real field exploration — leaving graduates unprepared.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features -->
-    <section id="features" class="section">
-        <div class="container">
-            <div class="features-intro reveal">
-                <div class="section-eyebrow">The LithoQuest Platform</div>
-                <h2>Your geological <em>co-pilot</em></h2>
-                <p>Three tightly integrated modules that transform how you move from raw sample data to discovery-grade
-                    insight.</p>
-            </div>
-            <div class="features-grid reveal">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#c8831e" stroke-width="1.5">
-                            <path
-                                d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
-                        </svg>
-                    </div>
-                    <h3>Geochemical Automation Engine</h3>
-                    <p>Instantly process lab results, synthesize AAS parameters, and calculate precise mineral
-                        concentrations. Transform hours of manual computation into a single prompt.</p>
-                    <div class="feature-tag">AAS · ppm · Li · REE</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#1ab3bc" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
-                        </svg>
-                    </div>
-                    <h3>Geospatial AI & Predictive Mapping</h3>
-                    <p>Vector-database-powered spatial algorithms read geological maps, cross-reference regional
-                        stratigraphy, and surface zones of high exploration potential before you set foot in the field.
-                    </p>
-                    <div class="feature-tag">GeoPandas · Vector DB · GIS</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#c8831e" stroke-width="1.5">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
-                    </div>
-                    <h3>Intelligent Synthesis</h3>
-                    <p>A custom Earth-science LLM that interprets complex geological prompts, summarizes technical
-                        literature, and auto-drafts formally cited field reports — structured, referenced, ready to
-                        submit.</p>
-                    <div class="feature-tag">Fine-tuned LLM · APA · RAG</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Architecture -->
-    <section id="architecture" class="section">
-        <div class="container">
-            <div class="arch-grid">
-                <div class="arch-text reveal">
-                    <div class="section-eyebrow">Under the Hood</div>
-                    <h2>Built for <em>precision</em> at scale</h2>
-                    <p>LithoQuest's architecture is engineered for the demands of exploration-grade data — from raw ppm
-                        readings to terabyte-scale stratigraphic archives. Every layer is purpose-built for Earth
-                        science.</p>
-                    <p
-                        style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-muted); margin-top: 1.5rem; line-height:1.8;">
-                        Phase-tracked development via GitHub ensures stable, continuous deployment across all modules.
-                    </p>
-                </div>
-                <div class="arch-stack reveal reveal-delay-1">
-                    <div class="arch-layer">
-                        <div class="layer-bar"></div>
-                        <span class="layer-num">01</span>
-                        <span class="layer-label">AI Interface & Synthesis</span>
-                        <span class="layer-tech">Fine-tuned LLM</span>
-                    </div>
-                    <div class="arch-layer">
-                        <div class="layer-bar"></div>
-                        <span class="layer-num">02</span>
-                        <span class="layer-label">Geospatial Intelligence</span>
-                        <span class="layer-tech">Vector DB · GeoPandas</span>
-                    </div>
-                    <div class="arch-layer">
-                        <div class="layer-bar"></div>
-                        <span class="layer-num">03</span>
-                        <span class="layer-label">Geochemical Processing</span>
-                        <span class="layer-tech">Python · SciPy</span>
-                    </div>
-                    <div class="arch-layer">
-                        <div class="layer-bar"></div>
-                        <span class="layer-num">04</span>
-                        <span class="layer-label">Data Retrieval Layer</span>
-                        <span class="layer-tech">High-performance Vector Store</span>
-                    </div>
-                    <div class="arch-layer">
-                        <div class="layer-bar"></div>
-                        <span class="layer-num">05</span>
-                        <span class="layer-label">Infrastructure & DevOps</span>
-                        <span class="layer-tech">Linux · GitHub · CI/CD</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Market -->
-    <section id="market" class="section">
-        <div class="container">
-            <div class="section-eyebrow reveal" style="margin-bottom:2.5rem;">Target Community</div>
-            <div class="market-grid reveal">
-                <div class="market-card" data-num="01">
-                    <div class="market-icon"></div>
-                    <h3>Professional Exploration</h3>
-                    <p>LithoQuest delivers immediate ROI to mining societies, petroleum explorationists, and independent
-                        mineral processing firms — cutting operational costs while dramatically improving survey
-                        accuracy.</p>
-                    <ul class="market-bullets">
-                        <li>Mining & geosciences societies</li>
-                        <li>Petroleum exploration companies</li>
-                        <li>Independent mineral processors</li>
-                        <li>Critical mineral survey programs</li>
-                    </ul>
-                </div>
-                <div class="market-card" data-num="02">
-                    <div class="market-icon" style="background:linear-gradient(180deg,var(--teal),transparent);"></div>
-                    <h3>Academic Advancement</h3>
-                    <p>A definitive training environment for university-level physical sciences and geology students —
-                        equipping them with the AI and spatial analysis competencies the modern geotechnical industry
-                        demands from day one.</p>
-                    <ul class="market-bullets">
-                        <li>University geology departments</li>
-                        <li>Physical sciences programs</li>
-                        <li>Geotechnical graduate programs</li>
-                        <li>Industry-academia partnerships</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section id="cta" class="section">
-        <div class="container" style="text-align:center;">
-            <div class="section-eyebrow" style="justify-content:center;display:flex;">Early Access</div>
-            <h2 style="margin-bottom:1.2rem;">The future of exploration<br>starts <em>here</em></h2>
-            <p style="color:var(--cream-dim); max-width:480px; margin:0 auto 3rem;">Join the growing community of
-                geoscientists and students redefining what's possible in mineral discovery. Be first to access
-                LithoQuest.</p>
-            <div class="email-input-group" style="justify-content:center;">
-                <form id="earlyAccessForm" class="email-input-group" style="justify-content:center;">
-                    <input type="email" name="email" placeholder="your@email.com" id="emailInput" required>
-                    <button type="submit">Request Access</button>
-                </form>
-            </div>
-            <p
-                style="font-family:'JetBrains Mono',monospace; font-size:0.66rem; color:var(--text-muted); margin-top:1.2rem; letter-spacing:0.06em;">
-                No spam. Early access notifications only.</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-logo" style="display: flex; align-items: center; gap: 0.5rem;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L21 7.2V16.8L12 22L3 16.8V7.2L12 2Z" stroke="#c8831e" stroke-opacity="0.4"
-                    stroke-width="1.5" />
-                <path d="M3 12L8.5 8L14.5 17L21 11" stroke="#c8831e" stroke-width="1.5" stroke-linejoin="round" />
-                <circle cx="8.5" cy="8" r="2" fill="#1ab3bc" />
-                <circle cx="14.5" cy="17" r="2.5" fill="#1ab3bc" />
-            </svg>
-            <div>Litho<span style="color: var(--teal-dim);">Quest</span></div>
-        </div>
-        <div class="footer-text">© 2025 LithoQuest · lithoquest.io<br>Geotech AI for the modern explorationist</div>
-        <div class="footer-links">
-            <a href="#">Platform</a>
-            <a href="#">Research</a>
-            <a href="#">Contact</a>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-
-</html>
+                <circle cx="230" cy="230" r="200" stroke="#c8831e" stroke-opacity="0
