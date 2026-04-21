@@ -826,8 +826,10 @@
     <h2 style="margin-bottom:1.2rem;">The future of exploration<br>starts <em>here</em></h2>
     <p style="color:var(--cream-dim); max-width:480px; margin:0 auto 3rem;">Join the growing community of geoscientists and students redefining what's possible in mineral discovery. Be first to access LithoQuest.</p>
     <div class="email-input-group" style="justify-content:center;">
-      <input type="email" placeholder="your@email.com" id="emailInput">
-      <button onclick="handleSignup()">Request Access</button>
+      <form id="earlyAccessForm" class="email-input-group" style="justify-content:center;">
+         <input type="email" name="email" placeholder="your@email.com" id="emailInput" required>
+         <button type="submit">Request Access</button>
+      </form>
     </div>
     <p style="font-family:'JetBrains Mono',monospace; font-size:0.66rem; color:var(--text-muted); margin-top:1.2rem; letter-spacing:0.06em;">No spam. Early access notifications only.</p>
   </div>
