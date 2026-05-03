@@ -11,6 +11,392 @@
         href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── ROADMAP ── */
+        #roadmap {
+            background: var(--surface-2);
+            border-top: 0.5px solid var(--border-dim);
+            border-bottom: 0.5px solid var(--border-dim);
+        }
+
+        .roadmap-track {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .roadmap-track::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 0.5px;
+            background: linear-gradient(180deg, var(--amber), var(--teal), transparent);
+            opacity: 0.35;
+        }
+
+        .milestone {
+            display: flex;
+            gap: 2.5rem;
+            padding: 2rem 0;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .milestone-node {
+            width: 60px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .milestone-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1.5px solid var(--amber);
+            background: var(--black);
+            flex-shrink: 0;
+        }
+
+        .milestone-dot.complete {
+            background: var(--amber);
+        }
+
+        .milestone-dot.active {
+            background: var(--teal);
+            border-color: var(--teal);
+            animation: pulse 2s ease infinite;
+        }
+
+        .milestone-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .milestone-status.complete {
+            color: var(--amber);
+        }
+
+        .milestone-status.active {
+            color: var(--teal);
+        }
+
+        .milestone-status.upcoming {
+            color: var(--text-muted);
+        }
+
+        .milestone-body {
+            flex: 1;
+            padding-top: 0;
+        }
+
+        .milestone-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: 0.4rem;
+        }
+
+        .milestone-desc {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* ── FOUNDER ── */
+        #founder {
+            background: var(--black);
+        }
+
+        .founder-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .founder-card {
+            border: 0.5px solid var(--border);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--amber), transparent);
+        }
+
+        .founder-name {
+            font-family: 'Cormorant', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--cream);
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .founder-role {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .founder-detail-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            min-width: 70px;
+            padding-top: 1px;
+        }
+
+        .founder-detail-val {
+            font-size: 0.83rem;
+            color: var(--cream-dim);
+            line-height: 1.5;
+        }
+
+        .founder-detail-val a {
+            color: var(--amber-light);
+            text-decoration: none;
+        }
+
+        .founder-detail-val a:hover {
+            text-decoration: underline;
+        }
+
+        .leadership-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.3rem;
+        }
+
+        .chip {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.06em;
+            padding: 0.25rem 0.65rem;
+            border: 0.5px solid var(--border);
+            color: var(--cream-dim);
+        }
+
+        .founder-bio {
+            color: var(--cream-dim);
+            font-size: 0.93rem;
+            line-height: 1.8;
+        }
+
+        .founder-bio p {
+            margin-bottom: 1.2rem;
+        }
+
+        /* ── CAPABILITIES ── */
+        .caps-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: 3.5rem;
+            border: 0.5px solid var(--border);
+        }
+
+        .cap-row {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            border-bottom: 0.5px solid var(--border-dim);
+            transition: background 0.2s;
+        }
+
+        .cap-row:last-child {
+            border-bottom: none;
+        }
+
+        .cap-row:hover {
+            background: var(--surface-2);
+        }
+
+        .cap-label {
+            padding: 1.6rem 1.8rem;
+            border-right: 0.5px solid var(--border-dim);
+        }
+
+        .cap-label-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: 0.3rem;
+        }
+
+        .cap-label-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--amber);
+        }
+
+        .cap-body {
+            padding: 1.6rem 2rem;
+        }
+
+        .cap-body p {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 0.6rem;
+        }
+
+        .cap-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .code-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            background: rgba(200, 131, 30, 0.08);
+            border: 0.5px solid rgba(200, 131, 30, 0.2);
+            color: var(--amber-light);
+            padding: 0.1rem 0.5rem;
+            border-radius: 2px;
+            display: inline-block;
+            margin: 0 1px;
+        }
+
+        /* ── PIPELINE PHASES ── */
+        .pipeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5px;
+            background: var(--border-dim);
+            margin-top: 3rem;
+        }
+
+        .phase-block {
+            background: var(--surface);
+            padding: 2rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.2s;
+        }
+
+        .phase-block:hover {
+            background: var(--surface-2);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .phase-num {
+            font-family: 'Cormorant', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: rgba(200, 131, 30, 0.15);
+            line-height: 1;
+            min-width: 2.5rem;
+        }
+
+        .phase-title-wrap {}
+
+        .phase-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 0.25rem;
+        }
+
+        .phase-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--cream);
+        }
+
+        .phase-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            padding-left: 4rem;
+        }
+
+        .phase-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .phase-item-key {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.06em;
+            color: var(--amber);
+            min-width: 160px;
+            flex-shrink: 0;
+            padding-top: 1px;
+        }
+
+        .phase-item-val {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ── RESPONSIVE EXTRAS ── */
+        @media (max-width: 768px) {
+            .founder-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cap-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cap-label {
+                border-right: none;
+                border-bottom: 0.5px solid var(--border-dim);
+            }
+
+            .phase-items {
+                padding-left: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -63,7 +449,8 @@
         <ul class="nav-links">
             <li><a href="#features">Platform</a></li>
             <li><a href="#architecture">Stack</a></li>
-            <li><a href="#market">Community</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#founder">Team</a></li>
         </ul>
         <a href="#cta" class="nav-cta">Early Access</a>
     </nav>
@@ -100,10 +487,8 @@
                         <circle cx="230" cy="230" r="175" />
                     </clipPath>
                 </defs>
-
                 <circle cx="230" cy="230" r="200" stroke="#c8831e" stroke-opacity="0.1" stroke-width="0.5" />
                 <circle cx="230" cy="230" r="185" stroke="#c8831e" stroke-opacity="0.08" stroke-width="0.5" />
-
                 <g clip-path="url(#circleClip)">
                     <rect x="55" y="55" width="350" height="44" fill="#c8831e" fill-opacity="0.04" />
                     <rect x="55" y="99" width="350" height="36" fill="#1ab3bc" fill-opacity="0.035" />
@@ -113,7 +498,6 @@
                     <rect x="55" y="263" width="350" height="38" fill="#c8831e" fill-opacity="0.045" />
                     <rect x="55" y="301" width="350" height="50" fill="#1ab3bc" fill-opacity="0.03" />
                     <rect x="55" y="351" width="350" height="60" fill="#c8831e" fill-opacity="0.05" />
-
                     <line x1="55" y1="99" x2="405" y2="103" stroke="#c8831e" stroke-opacity="0.18" stroke-width="0.5" />
                     <line x1="55" y1="135" x2="405" y2="131" stroke="#1ab3bc" stroke-opacity="0.15"
                         stroke-width="0.5" />
@@ -126,14 +510,12 @@
                         stroke-width="0.5" />
                     <line x1="55" y1="351" x2="405" y2="354" stroke="#1ab3bc" stroke-opacity="0.12"
                         stroke-width="0.5" />
-
                     <path d="M230 55 Q218 130 224 187 Q230 220 228 263 Q226 310 230 405" stroke="#c8831e"
                         stroke-opacity="0.35" stroke-width="1.5" fill="none" />
                     <path d="M230 55 Q242 110 237 180 Q232 230 234 280 Q236 330 230 405" stroke="#c8831e"
                         stroke-opacity="0.12" stroke-width="0.5" fill="none" />
                     <path d="M170 55 Q175 120 185 190 Q195 240 200 310 Q205 355 198 405" stroke="#1ab3bc"
                         stroke-opacity="0.2" stroke-width="0.8" fill="none" />
-
                     <circle cx="224" cy="135" r="4" fill="#c8831e" fill-opacity="0.7" />
                     <circle cx="224" cy="135" r="8" fill="#c8831e" fill-opacity="0.12" />
                     <circle cx="228" cy="217" r="3" fill="#1ab3bc" fill-opacity="0.7" />
@@ -141,7 +523,6 @@
                     <circle cx="229" cy="301" r="5" fill="#c8831e" fill-opacity="0.6" />
                     <circle cx="229" cy="301" r="10" fill="#c8831e" fill-opacity="0.1" />
                     <circle cx="186" cy="187" r="2.5" fill="#1ab3bc" fill-opacity="0.5" />
-
                     <text x="244" y="139" font-family="JetBrains Mono, monospace" font-size="8" fill="#c8831e"
                         fill-opacity="0.6">Li 847ppm</text>
                     <text x="244" y="221" font-family="JetBrains Mono, monospace" font-size="8" fill="#1ab3bc"
@@ -149,12 +530,10 @@
                     <text x="244" y="305" font-family="JetBrains Mono, monospace" font-size="8" fill="#c8831e"
                         fill-opacity="0.6">Tmax 432°C</text>
                 </g>
-
                 <circle cx="230" cy="230" r="175" stroke="#c8831e" stroke-opacity="0.22" stroke-width="0.5" />
                 <circle cx="230" cy="230" r="210" stroke="#c8831e" stroke-opacity="0.06" stroke-width="0.5"
                     stroke-dasharray="4 8" />
                 <circle cx="230" cy="230" r="175" fill="url(#coreGlow)" />
-
                 <line x1="418" y1="99" x2="428" y2="99" stroke="#c8831e" stroke-opacity="0.25" stroke-width="0.5" />
                 <line x1="418" y1="135" x2="424" y2="135" stroke="#c8831e" stroke-opacity="0.18" stroke-width="0.5" />
                 <line x1="418" y1="187" x2="428" y2="187" stroke="#c8831e" stroke-opacity="0.25" stroke-width="0.5" />
@@ -170,107 +549,171 @@
     <div class="stats-bar" style="position:relative;z-index:1;">
         <div class="container">
             <div class="stat-item reveal">
-                <div class="stat-num">10×</div>
-                <div class="stat-label">Faster Geochemical Processing</div>
+                <div class="stat-num">RAG</div>
+                <div class="stat-label">Retrieval-Augmented Architecture</div>
             </div>
             <div class="stat-item reveal reveal-delay-1">
                 <div class="stat-num">3</div>
-                <div class="stat-label">Core AI-Powered Modules</div>
+                <div class="stat-label">Core Pipeline Phases</div>
             </div>
             <div class="stat-item reveal reveal-delay-2">
-                <div class="stat-num">AAS+</div>
-                <div class="stat-label">Lab Parameter Coverage</div>
+                <div class="stat-num">VES+</div>
+                <div class="stat-label">Geophysical Parameter Coverage</div>
             </div>
             <div class="stat-item reveal reveal-delay-3">
-                <div class="stat-num">∞</div>
-                <div class="stat-label">Stratigraphic Records Queryable</div>
+                <div class="stat-num">UNN</div>
+                <div class="stat-label">Academic Validation Partner</div>
             </div>
         </div>
     </div>
 
+    <!-- OVERVIEW -->
     <section id="overview" class="section"
         style="background: var(--surface-2); border-bottom: 0.5px solid var(--border);">
         <div class="container">
             <div class="reveal" style="max-width: 840px; margin: 0 auto;">
-                <div class="section-eyebrow" style="text-align: center;">Project Overview</div>
-                <h2 style="text-align: center; margin-bottom: 3rem;">MVP & <em>Academic Validation</em></h2>
+                <div class="section-eyebrow" style="text-align: center;">Executive Summary</div>
+                <h2 style="text-align: center; margin-bottom: 3rem;">A geosciences data<br><em>infrastructure
+                        platform</em></h2>
 
                 <div style="color: var(--cream-dim); font-size: 0.95rem; line-height: 1.8;">
-                    <p style="margin-bottom: 1.5rem;">LithoQuest is a highly advanced, AI-driven data processing
-                        platform engineered specifically to revolutionize mineral discovery and complex geochemical
-                        analysis. By bridging the critical gap between raw, unstructured fieldwork data and actionable
-                        spatial intelligence, the platform dramatically accelerates decision-making and operational
-                        efficiency in the physical sciences.</p>
+                    <p style="margin-bottom: 1.5rem;">LithoQuest is an AI-powered geosciences data infrastructure
+                        platform built to resolve a critical bottleneck in the physical sciences: the trapped value of
+                        unstructured fieldwork data. By utilizing a Retrieval-Augmented Generation (RAG) architecture,
+                        LithoQuest ingests dense, unstructured geological and geophysical reports and transforms them
+                        into highly structured, queryable, and spatially mapped JSON arrays.</p>
 
-                    <p style="margin-bottom: 1.5rem;">At its core, the LithoQuest application utilizes a
-                        Retrieval-Augmented Generation (RAG) architecture to ingest and process complex geophysics
-                        metrics, such as Vertical Electrical Sounding (VES) parameters, groundwater exploration data,
-                        and mineral liberation metrics like lepidolite crushing requirements. The system automatically
-                        synthesizes these dense, unstructured geological reports into clean, highly structured JSON
-                        arrays, which are then embedded and stored within local vector databases.</p>
+                    <p style="margin-bottom: 1.5rem;">The platform operates not as a conversational chatbot, but as a
+                        rigid, programmatic reasoning engine. It reads field reports, identifies critical geochemical
+                        and geophysical parameters, and outputs clean data ready for immediate database insertion — with
+                        LLMs serving strictly as internal extraction engines, severely constrained by technical system
+                        prompts to eliminate hallucination.</p>
 
                     <div
                         style="background: rgba(200, 131, 30, 0.05); border-left: 2px solid var(--amber); padding: 1.5rem; margin: 2rem 0; border-radius: 0 4px 4px 0;">
-                        <p style="margin: 0; color: var(--cream);"><strong>Currently operating in its Minimum Viable
-                                Product (MVP) phase, LithoQuest is being developed and rigorously tested within a
-                                closed, academic environment by peer geosciences researchers at the University of
-                                Nigeria, Nsukka (UNN).</strong> The core platform relies on advanced Large Language
-                            Models serving strictly as internal reasoning engines for data extraction, severely
-                            constrained by technical system prompts to prevent hallucination.</p>
+                        <p style="margin: 0; color: var(--cream);"><strong>Currently operating in its Functional Beta
+                                phase (Quest MVP), LithoQuest is being developed and rigorously tested within a closed,
+                                academic environment by peer geosciences researchers at the University of Nigeria,
+                                Nsukka (UNN).</strong> The core platform leverages Amazon Bedrock (with localized
+                            open-source fallback models) as its extraction backbone, with structured outputs routed to
+                            MongoDB Atlas via a serverless, auto-scaling infrastructure.</p>
                     </div>
 
                     <p>By automating the tedious data-structuring phase of geological exploration, LithoQuest empowers
-                        geoscientists to focus on high-level spatial mapping and resource evaluation. Ultimately, the
-                        project aims to modernize the broader mining and geosciences sector, providing a scalable,
-                        secure, and highly accurate computational foundation for the next generation of sustainable
-                        mineral and groundwater exploration across West Africa and beyond.</p>
+                        geoscientists to focus on high-level spatial mapping and resource evaluation — modernizing the
+                        mining and geosciences sector with a scalable, secure, and highly accurate computational
+                        foundation for sustainable mineral and groundwater exploration across West Africa and beyond.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- PROBLEM -->
     <section id="problem" class="section">
         <div class="container">
             <div class="problem-grid">
                 <div class="problem-text reveal">
                     <div class="section-eyebrow">The Industry Problem</div>
                     <h2>Exploration is stuck in <em>manual mode</em></h2>
-                    <p>The mineral exploration sector — particularly critical battery metal discovery like lithium from
-                        lepidolite — depends on tedious, error-prone manual processing that hasn't meaningfully changed
-                        in decades.</p>
-                    <p>Geoscientists lose weeks to routine calculations. Stratigraphic knowledge sits in disconnected
-                        silos. And geology students graduate without ever touching the AI tools the modern industry
-                        demands.</p>
-                    <p>The gap between fieldwork and actionable intelligence has never been wider. LithoQuest closes it.
-                    </p>
+                    <p>Geological exploration, groundwater management, and mineral processing rely heavily on historical
+                        and active field reports. These reports are almost exclusively unstructured text documents and
+                        PDFs.</p>
+                    <p>Extracting quantitative metrics — such as layer depths from Vertical Electrical Sounding (VES)
+                        surveys, or crushing size requirements for mineral liberation — is currently a slow, manual, and
+                        error-prone process. This unstructured data cannot be easily fed into modern predictive models,
+                        geographic information systems (GIS), or automated compliance pipelines.</p>
+                    <p>Geology students graduate without ever touching the AI tools the modern industry demands. The gap
+                        between fieldwork and actionable intelligence has never been wider. LithoQuest closes it.</p>
                 </div>
                 <div class="problem-cards">
                     <div class="problem-card reveal reveal-delay-1">
-                        <div class="problem-card-title">Data Bottlenecks</div>
-                        <p>Excessive time spent on routine AAS parameter interpretation and ppm concentration
-                            conversions — tasks that should take seconds, not days.</p>
+                        <div class="problem-card-title">Unstructured Data Bottleneck</div>
+                        <p>Field reports — PDFs, handwritten notes, assay tables — cannot be ingested directly into
+                            predictive models or GIS pipelines. Every data point requires manual extraction, introducing
+                            delay and human error.</p>
                     </div>
                     <div class="problem-card reveal reveal-delay-2">
-                        <div class="problem-card-title">Fragmented Insights</div>
-                        <p>Traditional geological mapping is disconnected from computational tools, inflating
-                            "time-to-discovery" and increasing operational costs across every survey.</p>
+                        <div class="problem-card-title">Fragmented Geophysical Insights</div>
+                        <p>VES resistivity readings, lithology descriptions, and aquifer classifications sit in
+                            disconnected documents. Without structured extraction, cross-referencing field data across
+                            surveys is prohibitively expensive.</p>
                     </div>
                     <div class="problem-card reveal reveal-delay-3">
-                        <div class="problem-card-title">The Educational Gap</div>
-                        <p>Academic geology departments lack integrated software that teaches AI and computer vision
-                            applied to real field exploration — leaving graduates unprepared.</p>
+                        <div class="problem-card-title">The Compliance & Automation Gap</div>
+                        <p>Automated compliance pipelines require structured, machine-readable inputs. The absence of
+                            systematic geochemical data structuring inflates time-to-discovery and raises operational
+                            costs across every survey programme.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="features" class="section">
+    <!-- CAPABILITIES -->
+    <section id="features" class="section" style="background: var(--surface);">
         <div class="container">
             <div class="features-intro reveal">
-                <div class="section-eyebrow">The LithoQuest Platform</div>
+                <div class="section-eyebrow">The LithoQuest Solution</div>
+                <h2>Three precise <em>extraction capabilities</em></h2>
+                <p>LithoQuest reads unstructured geological reports, identifies critical parameters, and outputs clean,
+                    queryable JSON — ready for immediate database insertion and spatial analysis.</p>
+            </div>
+
+            <div class="caps-grid reveal">
+                <div class="cap-row">
+                    <div class="cap-label">
+                        <div class="cap-label-text">Geophysical Data Extraction</div>
+                        <div class="cap-label-sub">VES · Resistivity · Lithology</div>
+                    </div>
+                    <div class="cap-body">
+                        <p>Parsing raw text field reports to identify and structure Vertical Electrical Sounding (VES)
+                            metrics with full parameter fidelity. Extracted fields include <span
+                                class="code-pill">layer_depth_m</span>, <span
+                                class="code-pill">resistivity_ohm_m</span>, and domain-specific <span
+                                class="code-pill">lithology_description</span> parameters.</p>
+                        <p>The semantic chunking engine preserves geological context throughout extraction — keeping
+                            resistivity metrics mathematically tied to their respective layer depths, preventing the
+                            data-association errors common in naive parsing approaches.</p>
+                    </div>
+                </div>
+                <div class="cap-row">
+                    <div class="cap-label">
+                        <div class="cap-label-text">Hydrogeological Mapping</div>
+                        <div class="cap-label-sub">Aquifer · Water Table · GIS</div>
+                    </div>
+                    <div class="cap-body">
+                        <p>Automating the detection and categorization of saturated aquifer zones and water table depths
+                            from qualitative field notes. The system converts ambiguous, prose-form hydrogeological
+                            observations into structured, machine-readable classifications — enabling direct ingestion
+                            into GIS pipelines and groundwater management systems.</p>
+                        <p>This bridges the critical gap between field geologist notation conventions and the structured
+                            inputs demanded by modern spatial analysis platforms.</p>
+                    </div>
+                </div>
+                <div class="cap-row">
+                    <div class="cap-label">
+                        <div class="cap-label-text">Mineral Processing Analysis</div>
+                        <div class="cap-label-sub">Liberation · Crushing · Assay</div>
+                    </div>
+                    <div class="cap-body">
+                        <p>Extracting specific mineral liberation requirements from bulk assay text — including optimal
+                            crushing sizes for lepidolite and construction-grade materials. The system identifies
+                            actionable parameters buried within dense laboratory and field report prose, structuring
+                            them for direct use in mineral processing workflow optimization.</p>
+                        <p>Critical battery metal exploration — particularly lithium from lepidolite — depends on
+                            precise crushing specifications that historically required manual specialist extraction from
+                            each report.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Previous 3-card grid preserved below for platform context -->
+            <div class="features-intro reveal" style="margin-top: 5rem; margin-bottom: 2.5rem;">
+                <div class="section-eyebrow">Platform Modules</div>
                 <h2>Your geological <em>co-pilot</em></h2>
-                <p>Three tightly integrated modules that transform how you move from raw sample data to discovery-grade
-                    insight.</p>
+                <p>The three tightly integrated modules powering each extraction capability — from raw sample data to
+                    discovery-grade insight.</p>
             </div>
             <div class="features-grid reveal">
                 <div class="feature-card">
@@ -282,8 +725,9 @@
                     </div>
                     <h3>Geochemical Automation Engine</h3>
                     <p>Instantly process lab results, synthesize AAS parameters, and calculate precise mineral
-                        concentrations. Transform hours of manual computation into a single prompt.</p>
-                    <div class="feature-tag">AAS · ppm · Li · REE</div>
+                        concentrations. A Python-driven ingestion layer strips formatting, tables, and noise from
+                        uploaded PDF field reports before semantic chunking preserves geological context.</p>
+                    <div class="feature-tag">AAS · ppm · Li · REE · VES</div>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -293,10 +737,10 @@
                         </svg>
                     </div>
                     <h3>Geospatial AI & Predictive Mapping</h3>
-                    <p>Vector-database-powered spatial algorithms read geological maps, cross-reference regional
-                        stratigraphy, and surface zones of high exploration potential before you set foot in the field.
-                    </p>
-                    <div class="feature-tag">GeoPandas · Vector DB · GIS</div>
+                    <p>Atlas Vector Search houses both raw document embeddings and structured outputs in a unified
+                        database environment — reducing latency and infrastructure complexity. Cross-reference regional
+                        stratigraphy and surface zones of high exploration potential.</p>
+                    <div class="feature-tag">MongoDB Atlas · Vector Search · GIS</div>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -305,66 +749,177 @@
                         </svg>
                     </div>
                     <h3>Intelligent Synthesis</h3>
-                    <p>A custom Earth-science LLM that interprets complex geological prompts, summarizes technical
-                        literature, and auto-drafts formally cited field reports — structured, referenced, ready to
-                        submit.</p>
-                    <div class="feature-tag">Fine-tuned LLM · APA · RAG</div>
+                    <p>Amazon Bedrock models (with localized open-source fallback) serve strictly as data-extraction
+                        engines — instructed to bypass conversational outputs and generate pure JSON arrays containing
+                        targeted metrics. No hallucination. No ambiguity.</p>
+                    <div class="feature-tag">Amazon Bedrock · RAG · JSON · APA</div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ARCHITECTURE -->
     <section id="architecture" class="section">
         <div class="container">
             <div class="arch-grid">
                 <div class="arch-text reveal">
-                    <div class="section-eyebrow">Under the Hood</div>
-                    <h2>Built for <em>precision</em> at scale</h2>
-                    <p>LithoQuest's architecture is engineered for the demands of exploration-grade data — from raw ppm
-                        readings to terabyte-scale stratigraphic archives. Every layer is purpose-built for Earth
-                        science.</p>
+                    <div class="section-eyebrow">Technical Architecture</div>
+                    <h2>The RAG Pipeline — <em>three phases</em></h2>
+                    <p>A decoupled, microservices approach ensures rapid processing, cost-efficiency, and minimal vendor
+                        lock-in. Every layer is purpose-built for Earth science data demands — from raw field PDFs to
+                        terabyte-scale stratigraphic archives.</p>
                     <p
                         style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-muted); margin-top: 1.5rem; line-height:1.8;">
-                        Phase-tracked development via GitHub ensures stable, continuous deployment across all modules.
+                        Serverless scaling via MongoDB Startup program ($500 credit tier) ensures costs scale to zero
+                        during idle periods between bursty academic testing cycles.
                     </p>
                 </div>
-                <div class="arch-stack reveal reveal-delay-1">
-                    <div class="arch-layer">
-                        <div class="layer-bar"></div>
-                        <span class="layer-num">01</span>
-                        <span class="layer-label">AI Interface & Synthesis</span>
-                        <span class="layer-tech">Fine-tuned LLM</span>
-                    </div>
-                    <div class="arch-layer">
-                        <div class="layer-bar"></div>
-                        <span class="layer-num">02</span>
-                        <span class="layer-label">Geospatial Intelligence</span>
-                        <span class="layer-tech">Vector DB · GeoPandas</span>
-                    </div>
-                    <div class="arch-layer">
-                        <div class="layer-bar"></div>
-                        <span class="layer-num">03</span>
-                        <span class="layer-label">Geochemical Processing</span>
-                        <span class="layer-tech">Python · SciPy</span>
-                    </div>
-                    <div class="arch-layer">
-                        <div class="layer-bar"></div>
-                        <span class="layer-num">04</span>
-                        <span class="layer-label">Data Retrieval Layer</span>
-                        <span class="layer-tech">High-performance Vector Store</span>
-                    </div>
-                    <div class="arch-layer">
-                        <div class="layer-bar"></div>
-                        <span class="layer-num">05</span>
-                        <span class="layer-label">Infrastructure & DevOps</span>
-                        <span class="layer-tech">Linux · GitHub · CI/CD</span>
+                <div class="reveal reveal-delay-1">
+                    <div class="pipeline">
+
+                        <div class="phase-block">
+                            <div class="phase-header">
+                                <div class="phase-num">01</div>
+                                <div class="phase-title-wrap">
+                                    <div class="phase-label">Data Ingestion & Pre-processing</div>
+                                    <div class="phase-name">Python Backend</div>
+                                </div>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">
+                                    <div class="phase-item-key">Document Parsing</div>
+                                    <div class="phase-item-val">A Python-driven ingestion layer strips formatting,
+                                        tables, and noise from uploaded PDF field reports — producing clean prose ready
+                                        for extraction.</div>
+                                </div>
+                                <div class="phase-item">
+                                    <div class="phase-item-key">Semantic Chunking</div>
+                                    <div class="phase-item-val">Cleaned text is algorithmically divided into overlapping
+                                        logical chunks to preserve geological context, keeping resistivity metrics
+                                        mathematically tied to their respective layer depths.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="phase-block">
+                            <div class="phase-header">
+                                <div class="phase-num">02</div>
+                                <div class="phase-title-wrap">
+                                    <div class="phase-label">The Reasoning Engine</div>
+                                    <div class="phase-name">LLM Layer — Amazon Bedrock</div>
+                                </div>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">
+                                    <div class="phase-item-key">Compute Allocation</div>
+                                    <div class="phase-item-val">Lightweight AWS EC2 instances (scaling from 8 vCPUs)
+                                        handle API routing and backend logic — balancing throughput with cost during
+                                        academic testing cycles.</div>
+                                </div>
+                                <div class="phase-item">
+                                    <div class="phase-item-key">Extraction Models</div>
+                                    <div class="phase-item-val">Amazon Bedrock (or localized open-source fallback) used
+                                        strictly as data-extraction engines via rigid system prompts — bypassing
+                                        conversational output to generate pure JSON arrays of targeted metrics.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="phase-block">
+                            <div class="phase-header">
+                                <div class="phase-num">03</div>
+                                <div class="phase-title-wrap">
+                                    <div class="phase-label">The Data Storage Layer</div>
+                                    <div class="phase-name">MongoDB Atlas</div>
+                                </div>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">
+                                    <div class="phase-item-key">Native JSON Handling</div>
+                                    <div class="phase-item-val">Extracted arrays pushed directly to MongoDB Atlas — its
+                                        NoSQL document structure accommodates varying geological parameters without
+                                        rigid SQL schema migrations.</div>
+                                </div>
+                                <div class="phase-item">
+                                    <div class="phase-item-key">Unified Vector Store</div>
+                                    <div class="phase-item-val">Atlas Vector Search houses both raw document embeddings
+                                        and structured outputs in a single, unified environment — reducing latency and
+                                        infrastructure complexity.</div>
+                                </div>
+                                <div class="phase-item">
+                                    <div class="phase-item-key">Serverless Scaling</div>
+                                    <div class="phase-item-val">Deployed on a Serverless Instance framework via MongoDB
+                                        Startup program, ensuring infrastructure costs scale down to zero between bursty
+                                        testing periods.</div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="market" class="section">
+    <!-- ROADMAP -->
+    <section id="roadmap" class="section">
+        <div class="container">
+            <div class="reveal" style="max-width: 780px;">
+                <div class="section-eyebrow">Development Roadmap</div>
+                <h2>Functional Beta — <em>Quest MVP</em></h2>
+                <p style="color: var(--cream-dim); font-size: 0.95rem;">Three milestones chart the path from core
+                    architecture through live deployment at UNN's Department of Geology.</p>
+            </div>
+            <div class="roadmap-track reveal">
+
+                <div class="milestone">
+                    <div class="milestone-node">
+                        <div class="milestone-dot complete"></div>
+                        <div class="milestone-status complete">Complete</div>
+                    </div>
+                    <div class="milestone-body">
+                        <div class="milestone-title">Milestone 1 — Core Architecture Defined</div>
+                        <div class="milestone-desc">Core RAG architecture fully defined. Python extraction scripts
+                            written and validated. Database schemas outlined for VES and lithology data. The
+                            foundational pipeline from PDF ingestion through JSON output is structurally complete.</div>
+                    </div>
+                </div>
+
+                <div class="milestone">
+                    <div class="milestone-node">
+                        <div class="milestone-dot active"></div>
+                        <div class="milestone-status active">Active</div>
+                    </div>
+                    <div class="milestone-body">
+                        <div class="milestone-title">Milestone 2 — Cloud Provisioning & Local Validation</div>
+                        <div class="milestone-desc">Overcoming enterprise cloud provisioning bottlenecks, including AWS
+                            Trust & Safety clearance for the Bedrock extraction layer. Concurrently executing local
+                            parallel testing with dummy JSON generation to validate end-to-end database routing. This
+                            phase proves the pipeline before live data ingestion begins.</div>
+                    </div>
+                </div>
+
+                <div class="milestone">
+                    <div class="milestone-node">
+                        <div class="milestone-dot"></div>
+                        <div class="milestone-status upcoming">Upcoming</div>
+                    </div>
+                    <div class="milestone-body">
+                        <div class="milestone-title">Milestone 3 — Live Deployment & Historical Data Ingestion</div>
+                        <div class="milestone-desc">Full deployment of the Bedrock extraction layer in production.
+                            Ingestion of live historical geological data from the Department of Geology, University of
+                            Nigeria, Nsukka — the first real-world dataset to flow through the complete pipeline.
+                            Expansion of the Vector Search UI to support researcher queries across the accumulated
+                            stratigraphic record.</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- MARKET -->
+    <section id="market" class="section" style="background: var(--surface);">
         <div class="container">
             <div class="section-eyebrow reveal" style="margin-bottom:2.5rem;">Target Community</div>
             <div class="market-grid reveal">
@@ -373,45 +928,89 @@
                     <h3>Professional Exploration</h3>
                     <p>LithoQuest delivers immediate ROI to mining societies, petroleum explorationists, and independent
                         mineral processing firms — cutting operational costs while dramatically improving survey
-                        accuracy.</p>
+                        accuracy through automated, error-free data extraction at scale.</p>
                     <ul class="market-bullets">
-                        <li>Mining & geosciences societies</li>
-                        <li>Petroleum exploration companies</li>
+                        <li>Mining & geosciences societies (NMGS)</li>
+                        <li>Petroleum exploration companies (NAPE)</li>
                         <li>Independent mineral processors</li>
-                        <li>Critical mineral survey programs</li>
+                        <li>Critical mineral & battery metal programmes</li>
                     </ul>
                 </div>
                 <div class="market-card" data-num="02">
                     <div class="market-icon" style="background:linear-gradient(180deg,var(--teal),transparent);"></div>
                     <h3>Academic Advancement</h3>
                     <p>A definitive training environment for university-level physical sciences and geology students —
-                        equipping them with the AI and spatial analysis competencies the modern geotechnical industry
-                        demands from day one.</p>
+                        currently validated at UNN and positioned to expand across geosciences departments seeking to
+                        bridge the gap between traditional fieldwork and AI-augmented analysis workflows.</p>
                     <ul class="market-bullets">
-                        <li>University geology departments</li>
+                        <li>University geology departments (UNN)</li>
                         <li>Physical sciences programs</li>
                         <li>Geotechnical graduate programs</li>
-                        <li>Industry-academia partnerships</li>
+                        <li>Industry-academia research partnerships</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- FOUNDER -->
+    <section id="founder" class="section">
+        <div class="container">
+            <div class="founder-grid">
+                <div class="reveal">
+                    <div class="section-eyebrow">The Team</div>
+                    <h2>Built by a<br><em>geoscientist</em></h2>
+                    <p style="color: var(--cream-dim); font-size: 0.93rem; line-height: 1.8; margin-top: 1.2rem;">
+                        LithoQuest was conceived and built from the inside — by a geoscience student who experienced the
+                        manual data bottleneck first-hand, and decided to engineer the solution the industry needs.</p>
+                </div>
+                <div class="reveal reveal-delay-1">
+                    <div class="founder-card">
+                        <div class="founder-name">Pascal Igwebuike</div>
+                        <div class="founder-role">Founder & Lead Developer</div>
+
+                        <div class="founder-detail">
+                            <div class="founder-detail-label">Affiliation</div>
+                            <div class="founder-detail-val">University of Nigeria, Nsukka (UNN) — Department of Geology
+                            </div>
+                        </div>
+                        <div class="founder-detail">
+                            <div class="founder-detail-label">Email</div>
+                            <div class="founder-detail-val"><a
+                                    href="mailto:pascaligwe21@litho.quest">pascaligwe21@litho.quest</a></div>
+                        </div>
+                        <div class="founder-detail">
+                            <div class="founder-detail-label">Leadership</div>
+                            <div class="founder-detail-val">
+                                <div class="leadership-chips">
+                                    <span class="chip">President · NMGS-UNN Chapter</span>
+                                    <span class="chip">Vice-President · NAPE-UNN</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
     <section id="cta" class="section">
         <div class="container" style="text-align:center;">
             <div class="section-eyebrow" style="justify-content:center;display:flex;">Early Access</div>
             <h2 style="margin-bottom:1.2rem;">The future of exploration<br>starts <em>here</em></h2>
-            <p style="color:var(--cream-dim); max-width:480px; margin:0 auto 3rem;">Join the growing community of
-                geoscientists and students redefining what's possible in mineral discovery. Be first to access
-                LithoQuest.</p>
+            <p style="color:var(--cream-dim); max-width:520px; margin:0 auto 3rem;">Join the growing community of
+                geoscientists and students redefining what's possible in mineral discovery. Register your interest and
+                be first to access LithoQuest when Milestone 3 goes live.</p>
             <form id="earlyAccessForm" class="email-input-group" style="justify-content:center;">
                 <input type="email" name="email" placeholder="your@email.com" id="emailInput" required>
                 <button type="submit">Request Access</button>
             </form>
             <p
                 style="font-family:'JetBrains Mono',monospace; font-size:0.66rem; color:var(--text-muted); margin-top:1.2rem; letter-spacing:0.06em;">
-                No spam. Early access notifications only.</p>
+                No spam. Early access notifications only. · <a href="mailto:pascaligwe21@litho.quest"
+                    style="color:var(--text-muted); text-decoration:none;">pascaligwe21@litho.quest</a>
+            </p>
         </div>
     </section>
 
@@ -456,11 +1055,12 @@
             </svg>
             <div>Litho<span style="color: var(--teal-dim);">Quest</span></div>
         </div>
-        <div class="footer-text">© 2026 LithoQuest · litho.quest<br>Geotech AI for the modern explorationist</div>
+        <div class="footer-text">© 2026 LithoQuest · litho.quest<br>Geotech AI for the modern explorationist · UNN MVP
+            Programme</div>
         <div class="footer-links">
             <a href="#">Platform</a>
             <a href="#">Research</a>
-            <a href="#">Contact</a>
+            <a href="mailto:pascaligwe21@litho.quest">Contact</a>
         </div>
     </footer>
 
