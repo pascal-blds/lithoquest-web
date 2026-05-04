@@ -1,20 +1,80 @@
-# LithoQuest Web 🌍
+# LithoQuest
 
-> **AI-Powered Geological Intelligence**
-> 
-> The official landing page and static web asset repository for [LithoQuest.io](https://lithoquest.io).
+> AI-powered geological intelligence platform for mineral discovery and source rock evaluation.
 
-## Overview
-LithoQuest is a Geotech startup positioned at the intersection of traditional Earth sciences and modern artificial intelligence. This repository hosts the public-facing architecture and marketing site, outlining our core platform capabilities:
-* **Geochemical Automation:** Processing AAS parameters and lab results.
-* **Geospatial AI:** Predictive mapping via Vector databases and GeoPandas.
-* **Intelligent Synthesis:** Specialized LLMs for Earth-science report drafting.
+## Repository Structure
+
+```
+lithoquest/
+├── backend/
+│   ├── main.py                   ← FastAPI app entry point
+│   ├── requirements.txt          ← Python dependencies
+│   ├── .env.example              ← Copy to .env, add API key
+│   ├── models/schemas.py         ← All Pydantic models
+│   ├── services/
+│   │   ├── geochem_service.py    ← Rock-Eval, AAS, conversion, grade logic
+│   │   └── llm_service.py        ← Anthropic API with geology system prompt
+│   └── routers/
+│       ├── geochemical.py        ← /api/geochem/* endpoints
+│       ├── synthesis.py          ← /api/synthesis/* endpoints
+│       └── geospatial.py         ← /api/geo/* endpoints
+│
+├── frontend/
+│   ├── index.html                ← Vite HTML entry
+│   ├── vite.config.js            ← Dev proxy to backend
+│   ├── package.json
+│   └── src/
+│       ├── main.jsx              ← React root
+│       ├── App.jsx               ← Router
+│       ├── api.js                ← All API calls
+│       ├── index.css             ← Global styles + palette
+│       ├── components/
+│       │   ├── Nav.jsx
+│       │   └── ResultPanel.jsx
+│       └── pages/
+│           ├── Home.jsx
+│           ├── RockEval.jsx
+│           ├── AAS.jsx
+│           ├── Convert.jsx
+│           ├── Mineral.jsx
+│           ├── Synthesis.jsx
+│           └── GeoMap.jsx
+│
+├── .github/workflows/ci.yml      ← GitHub Actions CI
+├── .gitignore
+└── README.md
+```
+
+## Quick Start
+
+### Backend
+
+```bash
+cd backend
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env           # Add your ANTHROPIC_API_KEY
+uvicorn main:app --reload --port 8000
+```
+
+API docs: http://localhost:8000/docs
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+App: http://localhost:5173
 
 ## Deployment
-This site is designed as a lightweight, high-performance static page deployed continuously via **GitHub Pages**.
 
-## Affiliated Projects
-* Core application development is managed privately under the MVP initiative.
+- **Frontend**: Vercel or Netlify (root: `frontend/`, build: `npm run build`, out: `dist`)
+- **Backend**: Railway or Render (root: `backend/`, start: `uvicorn main:app --host 0.0.0.0 --port $PORT`)
+- Set `ANTHROPIC_API_KEY` and `ALLOWED_ORIGINS` as env vars in your backend host dashboard.
 
-## Contact
-For early access or partnership inquiries, please visit the main site to register your interest.
+## References
+
+- Espitalié et al. (1977), Peters & Cassa (1994), Tissot & Welte (1984)
