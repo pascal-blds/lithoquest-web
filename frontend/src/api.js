@@ -1,4 +1,4 @@
-const BASE = '/api'
+const BASE = 'https://lithoquest-web-production.up.railway.app/api'
 
 async function post(path, body) {
   const res = await fetch(`${BASE}${path}`, {
