@@ -1,10 +1,11 @@
 """
 LithoQuest LLM Service
-Wraps the Anthropic Messages API with a specialized Earth science system prompt.
+Uses Groq API (free) with Llama 3.3 70B.
+Sign up at console.groq.com to get a free API key.
 """
 
 import os
-import anthropic
+import httpx
 from models.schemas import SynthesisRequest, SynthesisResponse
 
 GEOLOGY_SYSTEM_PROMPT = """You are LithoQuest AI — a specialized geological intelligence system for the LithoQuest platform. You have deep expertise in:
@@ -51,15 +52,19 @@ Structure the report as:
 Be technically rigorous and formally written."""
 
 
-def _get_client() -> anthropic.Anthropic:
-    api_key = os.getenv("ANTHROPIC_API_KEY")
+GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
+GROQ_MODEL   = "llama-3.3-70b-versatile"
+
+
+def _get_api_key() -> str:
+    api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
-        raise RuntimeError("ANTHROPIC_API_KEY is not set in environment.")
-    return anthropic.Anthropic(api_key=api_key)
+        raise RuntimeError("GROQ_API_KEY is not set. Get a free key at console.groq.com")
+    return api_key
 
 
 def run_synthesis(request: SynthesisRequest) -> SynthesisResponse:
-    client = _get_client()
+    api_key = _get_api_key()
 
     messages = [{"role": m.role, "content": m.content} for m in request.messages]
 
@@ -72,21 +77,32 @@ def run_synthesis(request: SynthesisRequest) -> SynthesisResponse:
                 "content": f"{last['content']}\n\n--- DATA CONTEXT ---\n{request.context}\n--- END CONTEXT ---"
             }
 
-    system = GEOLOGY_SYSTEM_PROMPT
     if request.mode == "report":
-        # Wrap in report template
         context_block = request.context or "No additional context provided."
-        user_request = messages[-1]["content"] if messages else "Generate a geological report."
+        user_request  = messages[-1]["content"] if messages else "Generate a geological report."
         messages = [{"role": "user", "content": REPORT_TEMPLATE.format(
             context=f"User request: {user_request}\n\nData: {context_block}"
         )}]
 
-    response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=2048,
-        system=system,
-        messages=messages,
+    full_messages = [{"role": "system", "content": GEOLOGY_SYSTEM_PROMPT}] + messages
+
+    response = httpx.post(
+        GROQ_API_URL,
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
+        json={
+            "model": GROQ_MODEL,
+            "messages": full_messages,
+            "max_tokens": 2048,
+            "temperature": 0.3,
+        },
+        timeout=60.0,
     )
 
-    content = response.content[0].text if response.content else ""
+    if response.status_code != 200:
+        raise RuntimeError(f"Groq API error {response.status_code}: {response.text}")
+
+    content = response.json()["choices"][0]["message"]["content"]
     return SynthesisResponse(content=content, mode=request.mode)
