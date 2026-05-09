@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 
-from routers import geochemical, synthesis, geospatial
+from routers import geochemical, synthesis, geospatial, extraction
 
 load_dotenv()
 
@@ -23,9 +23,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(geochemical.router, prefix="/api/geochem", tags=["Geochemical"])
+app.include_router(geochemical.router, prefix="/api/geochem",   tags=["Geochemical"])
 app.include_router(synthesis.router,   prefix="/api/synthesis", tags=["Synthesis"])
 app.include_router(geospatial.router,  prefix="/api/geo",       tags=["Geospatial"])
+app.include_router(extraction.router,  prefix="/api/extract",   tags=["Extraction"])
 
 @app.get("/health")
 def health():

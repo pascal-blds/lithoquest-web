@@ -1,7 +1,7 @@
 import { NavLink, Link } from 'react-router-dom'
-import { useState } from 'react'
 
 const links = [
+  { to: '/extract',   label: 'AI Extraction', isNew: true },
   { to: '/rock-eval', label: 'Rock-Eval' },
   { to: '/aas',       label: 'AAS' },
   { to: '/convert',   label: 'Convert' },
@@ -29,26 +29,33 @@ const styles = {
     letterSpacing: '0.05em',
   },
   logoSpan: { color: '#1ab3bc' },
-  links: {
-    display: 'flex', gap: '0.2rem', listStyle: 'none',
-  },
+  links: { display: 'flex', gap: '0.2rem', listStyle: 'none' },
   link: {
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: '0.68rem',
+    fontSize: '0.65rem',
     letterSpacing: '0.1em',
     textTransform: 'uppercase',
-    padding: '0.45rem 0.9rem',
+    padding: '0.45rem 0.75rem',
     color: '#6e6558',
     textDecoration: 'none',
     borderBottom: '2px solid transparent',
     transition: 'color 0.2s, border-color 0.2s',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.4rem',
   },
   linkActive: { color: '#e8a84a', borderBottomColor: '#c8831e' },
+  newBadge: {
+    fontSize: '0.5rem',
+    background: '#1ab3bc',
+    color: '#08090b',
+    padding: '0.1rem 0.35rem',
+    letterSpacing: '0.08em',
+    fontWeight: 600,
+  },
 }
 
 export default function Nav() {
-  const [open, setOpen] = useState(false)
-
   return (
     <nav style={styles.nav}>
       <Link to="/" style={styles.logo}>
@@ -66,6 +73,7 @@ export default function Nav() {
               })}
             >
               {l.label}
+              {l.isNew && <span style={styles.newBadge}>NEW</span>}
             </NavLink>
           </li>
         ))}

@@ -7,6 +7,7 @@ import Convert from './pages/Convert'
 import Mineral from './pages/Mineral'
 import Synthesis from './pages/Synthesis'
 import GeoMap from './pages/GeoMap'
+import Extract from './pages/Extract'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/mineral"   element={<Mineral />} />
         <Route path="/synthesis" element={<Synthesis />} />
         <Route path="/map"       element={<GeoMap />} />
+        <Route path="/extract"   element={<Extract />} />
       </Routes>
     </>
   )
