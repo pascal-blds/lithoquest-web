@@ -2,6 +2,14 @@ import { Link } from 'react-router-dom'
 
 const modules = [
   {
+    to: '/extract',
+    title: 'AI Extraction Engine',
+    desc: 'Paste any unstructured geological field report — VES surveys, borehole logs, assay sheets — and get back clean structured JSON instantly. No templates. No formatting required.',
+    tag: 'VES · Hydro · Mineral Liberation',
+    color: '#1ab3bc',
+    isNew: true,
+  },
+  {
     to: '/rock-eval',
     title: 'Rock-Eval Interpreter',
     desc: 'Input TOC, S1, S2, S3, and Tmax to instantly classify source rock quality, kerogen type, and thermal maturity.',
@@ -33,7 +41,7 @@ const modules = [
     to: '/synthesis',
     title: 'AI Synthesis',
     desc: 'Chat with a geology-specialized AI, auto-generate cited field reports, and summarize technical papers.',
-    tag: 'Powered by Claude',
+    tag: 'Powered by Groq / Llama',
     color: '#c8831e',
   },
   {
@@ -54,7 +62,6 @@ export default function Home() {
         borderBottom: '0.5px solid var(--border-dim)',
         position: 'relative', overflow: 'hidden',
       }}>
-        {/* Strata bg */}
         <div style={{
           position: 'absolute', inset: 0, zIndex: 0,
           background: `
@@ -84,7 +91,7 @@ export default function Home() {
             from Rock-Eval pyrolysis to AAS results to AI-authored field reports.
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link to="/rock-eval" className="btn btn-primary">Start with Rock-Eval</Link>
+            <Link to="/extract" className="btn btn-primary">Launch AI Extraction</Link>
             <Link to="/synthesis" className="btn btn-ghost">Open AI Synthesis</Link>
           </div>
         </div>
@@ -94,22 +101,34 @@ export default function Home() {
       <section className="section">
         <div className="container">
           <div className="eyebrow">Platform Modules</div>
-          <h2 style={{ marginBottom: '3rem' }}>Six tools. <em>One platform.</em></h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5px', background: 'var(--border-dim)' }}>
+          <h2 style={{ marginBottom: '3rem' }}>Seven tools. <em>One platform.</em></h2>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '1.5px',
+            background: 'var(--border-dim)',
+          }}>
             {modules.map(m => (
-              <Link
-                key={m.to}
-                to={m.to}
-                style={{ textDecoration: 'none' }}
-              >
-                <div style={{
-                  background: 'var(--black)', padding: '2.2rem 2rem',
-                  transition: 'background 0.25s', cursor: 'pointer',
-                  height: '100%',
-                }}
+              <Link key={m.to} to={m.to} style={{ textDecoration: 'none' }}>
+                <div
+                  style={{
+                    background: 'var(--black)', padding: '2.2rem 2rem',
+                    transition: 'background 0.25s', cursor: 'pointer',
+                    height: '100%', position: 'relative',
+                  }}
                   onMouseEnter={e => e.currentTarget.style.background = 'var(--surface)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'var(--black)'}
                 >
+                  {/* NEW badge */}
+                  {m.isNew && (
+                    <div style={{
+                      position: 'absolute', top: '1.2rem', right: '1.2rem',
+                      fontFamily: "'JetBrains Mono',monospace",
+                      fontSize: '0.55rem', letterSpacing: '0.12em',
+                      background: '#1ab3bc', color: '#08090b',
+                      padding: '0.2rem 0.5rem', fontWeight: 600,
+                    }}>NEW</div>
+                  )}
                   <div style={{
                     width: 2, height: '2.5rem',
                     background: `linear-gradient(180deg, ${m.color}, transparent)`,
